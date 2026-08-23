@@ -3,4 +3,4 @@
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
     };
-};;
+};
