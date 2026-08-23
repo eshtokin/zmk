@@ -3,6 +3,6 @@
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
-        kycan = <&kscan>;
+        kscan = <&kscan>;
     };
 };
