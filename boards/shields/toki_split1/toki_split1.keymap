@@ -23,11 +23,33 @@
                 &kp LSHFT  &kp Z      &kp X      &kp C      &kp V      &kp B
                 &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH   &kp RSHFT
 
-                // R5 — левая половина
-                           &kp LGUI   &kp LALT   &kp SPACE  &kp RET    &kp DEL
+                // R5 — thumbs, left to right. Tap Esc; hold Ctrl.
+                           &kp LALT   &kp LGUI   &mt LCTRL ESC &kp SPACE &kp RET
+                &kp BSPC   &kp SPACE  &kp RGUI   &kp RALT   &mo 1
+            >;
+        };
 
-                // R5 — правая половина
-                &kp BSPC   &kp SPACE  &kp RALT   &kp RGUI   &kp RCTRL
+        fn_layer {
+            bindings = <
+                // R1: function keys
+                &trans     &kp F1     &kp F2     &kp F3     &kp F4     &kp F5
+                &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &kp F11
+
+                // R2: symbols
+                &trans     &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT
+                &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR   &kp RPAR   &kp F12
+
+                // R3: navigation on the Vim motion cluster
+                &trans     &trans     &trans     &trans     &trans     &trans
+                &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &kp HOME   &kp END
+
+                // R4: editing and media
+                &trans     &trans     &trans     &trans     &trans     &trans
+                &kp PG_DN  &kp PG_UP  &kp INS    &kp DEL    &kp C_PP   &kp C_VOL_UP
+
+                // R5: keep regular thumb actions available while Fn is held
+                           &trans     &trans     &trans     &trans     &trans
+                &trans     &trans     &trans     &trans     &trans
             >;
         };
     };
