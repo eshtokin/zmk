@@ -5,14 +5,12 @@
 #include "toki_split1.dtsi"
 
 &kscan {
-    // Replace these comments with the GPIO pins in the matrix for the left side.
-    // See https://zmk.dev/docs/development/hardware-integration/new-shield#shield-overlays
     col-gpios
-        = <&pro_micro 9 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 10 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 14 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 15 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 16 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 18 GPIO_ACTIVE_HIGH>
+        = <&pro_micro 9  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&pro_micro 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+        , <&pro_micro 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
         ;
 };
