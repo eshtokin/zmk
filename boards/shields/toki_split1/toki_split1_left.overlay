@@ -5,16 +5,6 @@
 #include "toki_split1.dtsi"
 
 &kscan {
-    // The physical R2 and R3 wires are connected in the opposite order on
-    // the left controller.
-    row-gpios
-        = <&pro_micro 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&pro_micro 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        , <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-        ;
-
     col-gpios
         = <&pro_micro 9  GPIO_ACTIVE_HIGH>
         , <&pro_micro 10 GPIO_ACTIVE_HIGH>
