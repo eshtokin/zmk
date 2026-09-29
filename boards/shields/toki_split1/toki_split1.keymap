@@ -2,6 +2,21 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 
+#define L_BASE 0
+#define L_NAV 1
+#define L_DELIM 2
+#define L_ARITH 3
+#define L_PUNC 4
+#define L_NUM 5
+#define L_MORE 6
+#define L_MOVE 7
+#define L_SELECT 8
+#define L_DELETE 9
+#define L_SHORTCUTS 10
+#define L_UTIL 11
+
+#define ___ &trans
+
 / {
     combos {
         compatible = "zmk,combos";
@@ -47,34 +62,244 @@
                 &kp ESC    &kp N1     &kp N2     &kp N3     &kp N4     &kp N5
                 &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &kp BSPC
 
-                // R2
-                &kp TAB    &kp Q      &kp W      &kp E      &kp R      &kp T
+                // R2: tap letters; hold Q/W/E/R for shortcut/select/move/delete layers
+                &kp TAB    &lt L_SHORTCUTS Q &lt L_SELECT W &lt L_MOVE E &lt L_DELETE R &kp T
                 &kp Y      &kp U      &kp I      &kp O      &kp P      &kp BSLH
 
-                // R3
-                &kp LCTRL  &kp A      &kp S      &kp D      &kp F      &kp G
+                // R3: tap letters; hold A/S/D/F for navigation/punctuation/arithmetic/delimiters
+                &kp LCTRL  &lt L_NAV A &lt L_PUNC S &lt L_ARITH D &lt L_DELIM F &kp G
                 &kp H      &kp J      &kp K      &kp L      &kp SEMI   &kp SQT
 
-                // R4
-                &kp LSHFT  &kp Z      &kp X      &kp C      &kp V      &kp B
+                // R4: tap letters; hold C/V for remaining symbols/number pad
+                &kp LSHFT  &kp Z      &kp X      &lt L_MORE C &lt L_NUM V &kp B
                 &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH   &kp RSHFT
 
-                // R5 — thumbs, left to right. Tap Esc; hold Ctrl.
+                // R5: thumbs, left to right. Tap Esc; hold Ctrl.
                            &kp LALT   &kp LGUI   &mt LCTRL ESC &kp SPACE &kp RET
-                &kp BSPC   &kp SPACE  &kp RGUI   &kp RALT   &mo 1
+                &kp BSPC   &kp SPACE  &kp RGUI   &kp RALT   &mo L_UTIL
             >;
         };
 
-        fn_layer {
-            display-name = "Fn";
+        nav_layer {
+            display-name = "Nav";
             bindings = <
-                // R1: Fn + Esc unlocks ZMK Studio
+                // A layer: hjkl arrows, u/i tabs, n/m enter, comma/dot page movement
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp TAB    &kp TAB    ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                &kp RET    &kp RET    &kp PG_DN  &kp PG_UP  ___        ___
+
+                           ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___
+            >;
+        };
+
+        delimiters_layer {
+            display-name = "Delim";
+            bindings = <
+                // F layer: { } ! / ( ) ? / [ ] $
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp LBRC   &kp RBRC   &kp EXCL   ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp LPAR   &kp RPAR   &kp QMARK  ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp LBKT   &kp RBKT   &kp DLLR   ___        ___
+
+                           ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___
+            >;
+        };
+
+        arithmetic_layer {
+            display-name = "Arith";
+            bindings = <
+                // D layer: < > # / + - = / * / %
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp LT     &kp GT     &kp HASH   ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp PLUS   &kp MINUS  &kp EQUAL  ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp ASTRK  &kp FSLH   &kp PRCNT  ___        ___
+
+                           ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___
+            >;
+        };
+
+        punctuation_layer {
+            display-name = "Punc";
+            bindings = <
+                // S layer: ' " ` / , . & / ; : ~
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp SQT    &kp DQT    &kp GRAVE  ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp COMMA  &kp DOT    &kp AMPS   ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp SEMI   &kp COLON  &kp TILDE  ___        ___
+
+                           ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___
+            >;
+        };
+
+        number_layer {
+            display-name = "Num";
+            bindings = <
+                // V layer: numpad plus nearby Backspace, +, -, Enter, period
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                &kp BSPC   &kp N7     &kp N8     &kp N9     &kp PLUS   ___
+
+                ___        ___        ___        ___        ___        ___
+                &kp DOT    &kp N4     &kp N5     &kp N6     &kp MINUS  ___
+
+                ___        ___        ___        ___        ___        ___
+                &kp N0     &kp N1     &kp N2     &kp N3     &kp RET    ___
+
+                           ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___
+            >;
+        };
+
+        remaining_symbols_layer {
+            display-name = "More";
+            bindings = <
+                // C layer: ^ | @ \ _
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp CARET  ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp PIPE   &kp AT     ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp BSLH   &kp UNDER  ___        ___        ___
+
+                           ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___
+            >;
+        };
+
+        movement_layer {
+            display-name = "Move";
+            bindings = <
+                // E layer: char/word/line movement for macOS
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp LEFT   &kp RIGHT  ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                &kp LG(LEFT) &kp LA(LEFT) &kp LA(RIGHT) &kp LG(RIGHT) ___ ___
+
+                ___        ___        ___        ___        ___        ___
+                &kp RET    &kp RET    ___        ___        ___        ___
+
+                           ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___
+            >;
+        };
+
+        selection_layer {
+            display-name = "Select";
+            bindings = <
+                // W layer: movement layer plus Shift
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp LS(LEFT) &kp LS(RIGHT) ___   ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                &kp LS(LG(LEFT)) &kp LS(LA(LEFT)) &kp LS(LA(RIGHT)) &kp LS(LG(RIGHT)) ___ ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                           ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___
+            >;
+        };
+
+        deletion_layer {
+            display-name = "Delete";
+            bindings = <
+                // R layer: delete char, word, or line for macOS
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp BSPC   &kp DEL    ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                &kp LG(BSPC) &kp LA(BSPC) &kp LA(DEL) &kp LG(DEL) ___ ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                           ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___
+            >;
+        };
+
+        shortcuts_layer {
+            display-name = "Short";
+            bindings = <
+                // Q layer: browser/app shortcuts from the article, adjusted for macOS
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp LG(LBKT) &kp LG(RBKT) &kp F2 &kp F4    ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        &kp LS(LG(LBKT)) &kp LS(LG(RBKT)) &kp LC(LG(F)) ___ ___
+
+                ___        ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___        ___
+
+                           ___        ___        ___        ___        ___
+                ___        ___        ___        ___        ___
+            >;
+        };
+
+        util_layer {
+            display-name = "Util";
+            bindings = <
+                // R1: Util + Esc unlocks ZMK Studio
                 &studio_unlock &kp F1 &kp F2     &kp F3     &kp F4     &kp F5
                 &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &kp F11
 
-                // R2: symbols; Fn + Tab clears the current Bluetooth profile
-                &bt BT_CLR &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT
-                &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR   &kp RPAR   &kp F12
+                // R2: layer access hints on the same left-hand keys, F12 on Backslash
+                &bt BT_CLR &mo L_SHORTCUTS &mo L_SELECT &mo L_MOVE &mo L_DELETE &kp PRCNT
+                &kp CARET  &mo L_DELIM &mo L_ARITH &mo L_PUNC &mo L_NUM &kp F12
 
                 // R3: Bluetooth profiles 1-5; navigation on the Vim motion cluster
                 &trans     &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
@@ -84,7 +309,7 @@
                 &bt BT_PRV &bt BT_NXT &trans     &trans     &trans     &trans
                 &kp PG_DN  &kp PG_UP  &kp INS    &kp DEL    &kp C_PP   &kp C_VOL_UP
 
-                // R5: keep regular thumb actions available while Fn is held
+                // R5: keep regular thumb actions available while Util is held
                            &trans     &trans     &trans     &trans     &trans
                 &trans     &trans     &trans     &trans     &trans
             >;
