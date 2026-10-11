@@ -76,9 +76,9 @@
                 &kp LSHFT  &kp Z      &kp X      &lt L_MORE C &lt L_NUM V &kp B
                 &kp N      &kp M      &kp COMMA  &kp DOT    &kp FSLH   &kp RSHFT
 
-                // R5: thumbs, left to right. Tap Esc; hold Ctrl.
-                           &kp LALT   &kp LGUI   &mt LCTRL ESC &kp SPACE &kp RET
-                &kp BSPC   &kp SPACE  &kp RGUI   &lt L_MOUSE RALT &mo L_UTIL
+                // R5: thumbs, left to right. Hold left GUI for mouse, tap Esc; hold Ctrl.
+                           &kp LALT   &lt L_MOUSE LGUI &mt LCTRL ESC &kp SPACE &kp RET
+                &kp BSPC   &kp SPACE  &kp RGUI   &kp RALT   &mo L_UTIL
             >;
         };
 
